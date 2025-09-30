@@ -230,28 +230,3 @@ sensitivity_df, detailed_df = analyzer.run_complete_analysis(
 )
 ```
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## License
-
-This project is part of a research assistantship. Please ensure proper attribution and academic integrity when using this code.
-
-## Contact
-
-For questions or issues, please contact the research team.
-
-## Changelog
-
-### Version 1.0.0
-- Initial release
-- Complete pipeline implementation
-- Data augmentation module
-- Model training and evaluation
-- Sensitivity analysis module
-- Professional documentation
