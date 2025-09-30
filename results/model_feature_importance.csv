@@ -1,0 +1,8 @@
+Feature,Importance
+Time_Years,0.48854774
+Cover_Thickness_mm,0.13182618
+Relative_Humidity_pct,0.123775646
+Temperature_K,0.078589275
+Chloride_Ion_Content_kgm3,0.06998717
+Water_Cement_Ratio,0.058273517
+Reinforcement_Diameter_mm,0.049000476
