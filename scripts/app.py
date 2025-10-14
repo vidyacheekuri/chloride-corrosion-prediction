@@ -55,7 +55,7 @@ def main():
     
     with col2:
         humidity = st.number_input("Relative Humidity (%)", 0.0, 100.0, 75.0)
-        chloride_content = st.number_input("Chloride Content (kg/m³)", 0.0, 10.0, 2.5, 0.1)
+        chloride_content = st.number_input("Chloride Content (kg/m³)", 0.0, 15.0, 2.5, 0.1)
         exposure_time = st.number_input("Exposure Time (years)", 0.0, 100.0, 10.0)
     
     if st.button("Predict", type="primary", use_container_width=True):
