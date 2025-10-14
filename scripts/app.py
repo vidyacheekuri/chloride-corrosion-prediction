@@ -51,7 +51,7 @@ def predict_corrosion(input_data, model_low, model_high, imputer, threshold=0.15
 def main():
     model_low, model_high, imputer = load_models()
     
-    st.title("🔬 Corrosion Rate Predictor")
+    st.title("Concrete ChlorideCorrosion Rate Predictor")
     st.caption("XGBoost-based model for reinforced concrete structures")
     
     # Input fields in 2 columns
