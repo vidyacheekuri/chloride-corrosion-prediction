@@ -43,7 +43,9 @@ env/
 .LSOverride
 ._*
 
-# Word temporary files
+# Word files
+*.docx
+*.doc
 ~$*.docx
 ~$*.doc
 
