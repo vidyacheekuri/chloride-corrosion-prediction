@@ -60,10 +60,10 @@ env/
 # *.csv
 # *.xlsx
 
-# Generated model files
-models/*.pkl
-models/*.h5
-models/*.joblib
+# Generated model files (commented out for deployment)
+# models/*.pkl
+# models/*.h5
+# models/*.joblib
 
 # Generated data files
 data/predictions_*.csv
