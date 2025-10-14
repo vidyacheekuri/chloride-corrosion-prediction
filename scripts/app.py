@@ -11,14 +11,24 @@ st.set_page_config(page_title="Corrosion Predictor", page_icon="🔬", layout="c
 @st.cache_resource
 def load_models():
     """Load the trained models and imputer"""
-    try:
-        model_low = joblib.load("../models/model_low.pkl")
-        model_high = joblib.load("../models/model_high.pkl")
-        imputer = joblib.load("../models/imputer.pkl")
-        return model_low, model_high, imputer
-    except FileNotFoundError:
-        st.error("⚠️ Model files not found!")
-        st.stop()
+    # Try different paths for local vs deployed
+    paths_to_try = [
+        "../models/model_low.pkl",      # Local path
+        "models/model_low.pkl",         # Deployed path
+        "./models/model_low.pkl"        # Alternative deployed path
+    ]
+    
+    for base_path in paths_to_try:
+        try:
+            model_low = joblib.load(base_path)
+            model_high = joblib.load(base_path.replace("model_low", "model_high"))
+            imputer = joblib.load(base_path.replace("model_low", "imputer"))
+            return model_low, model_high, imputer
+        except FileNotFoundError:
+            continue
+    
+    st.error("⚠️ Model files not found! Tried paths: " + ", ".join(paths_to_try))
+    st.stop()
 
 def predict_corrosion(input_data, model_low, model_high, imputer, threshold=0.15):
     """Make prediction using the segmented models"""
