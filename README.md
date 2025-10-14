@@ -1,232 +1,135 @@
-# Chloride Corrosion Prediction
+# Chloride Corrosion XGBoost Model
 
-A comprehensive machine learning pipeline for predicting chloride-induced corrosion rates in reinforced concrete structures using ensemble methods and sensitivity analysis.
+Machine learning model for predicting corrosion rates in reinforced concrete structures using XGBoost with segmented modeling approach.
 
 ## Overview
 
-This project implements a complete machine learning workflow for chloride corrosion prediction, including:
-
-- **Data Augmentation**: Safe augmentation techniques to increase training dataset size
-- **Ensemble Modeling**: Multi-model approach using MLP and XGBoost regressors
-- **Sensitivity Analysis**: Comprehensive input variable sensitivity analysis
-- **Performance Evaluation**: Detailed model performance metrics and visualizations
+This project implements a segmented XGBoost regression model to predict corrosion rates based on environmental and material properties. The model uses a dual-segment approach (low vs. high corrosion rates) with virtual sample generation to improve prediction accuracy.
 
 ## Features
 
-- **Safe Data Augmentation**: Percentage-based noise augmentation that preserves data integrity
-- **Ensemble Learning**: Voting regressor combining MLP and XGBoost models
-- **Comprehensive Evaluation**: Multiple performance metrics and error analysis
-- **Sensitivity Analysis**: Input variable perturbation analysis with visualizations
-- **Professional Code Structure**: Modular, well-documented, and maintainable codebase
+- **Segmented Modeling**: Separate models for low (<0.15) and high (≥0.15) corrosion rates
+- **Virtual Sample Generation**: Synthetic data augmentation for rare samples
+- **Feature Engineering**: Interaction features (Humidity×Temperature, Cement×Cover)
+- **Comprehensive Evaluation**: Multiple metrics including R², RMSE, MAE, and percentage error analysis
+
+## Requirements
+
+Install dependencies using:
+
+```bash
+pip install -r requirements.txt
+```
 
 ## Project Structure
 
 ```
-chloride_corrosion_ml/
-├── main.py                     # Main pipeline orchestrator
-├── requirements.txt            # Python dependencies
-├── README.md                   # This file
-├── src/                        # Source code modules
-│   ├── data_augmentation.py    # Data augmentation module
-│   ├── model_training.py       # Model training and evaluation
-│   └── sensitivity_analysis.py # Sensitivity analysis module
-├── data/                       # Data directory
-│   ├── Chloride_dataset.csv    # Input dataset
-│   ├── testing_data.csv        # Test dataset
-│   ├── augmented_training_data_unscaled.csv  # Augmented training data
-│   └── original_training_data.csv            # Original training data
-└── results/                    # Results and outputs
-    ├── chloride_corrosion_model.pkl          # Trained model
-    ├── feature_scaler.pkl                    # Feature scaler
-    ├── final_model_predictions.csv           # Prediction results
-    ├── model_feature_importance.csv          # Feature importance
-    ├── model_performance_summary.csv         # Performance metrics
-    ├── feature_sensitivity_ranking.csv       # Sensitivity ranking
-    ├── detailed_sensitivity_analysis.csv     # Detailed sensitivity results
-    ├── sensitivity_summary_table.csv         # Sensitivity summary
-    ├── sensitivity_ranking.png               # Sensitivity ranking plot
-    ├── sensitivity_heatmap.png               # Sensitivity heatmap
-    └── individual_sensitivities.png          # Individual sensitivity curves
+chloride_new/
+├── data/                          # Data files
+│   ├── Corrosion_Dataset_processed.csv
+│   ├── predictions_training.csv
+│   ├── predictions_testing.csv
+│   └── sensitivity_*.csv
+├── models/                        # Trained models
+│   ├── model_low.pkl
+│   ├── model_high.pkl
+│   └── imputer.pkl
+├── visualizations/                # Generated plots
+│   ├── predictions_plot.png
+│   ├── error_distribution.png
+│   └── sensitivity_*.png
+├── scripts/                       # Python scripts
+│   ├── train_model.py
+│   ├── predict.py
+│   ├── app.py
+│   └── sensitivity_analysis*.py
+├── notebooks/                     # Jupyter notebooks
+│   └── Modeling (5).ipynb
+├── requirements.txt
+├── .gitignore
+└── README.md
 ```
 
-## Installation
+## Dataset
 
-1. **Clone or download the project**:
-   ```bash
-   git clone <repository-url>
-   cd chloride_corrosion_ml
-   ```
+The model expects a CSV file named `Corrosion_Dataset_processed.csv` in the `data/` folder with the following features:
 
-2. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Prepare your data**:
-   - Place your input dataset as `data/Chloride_dataset.csv`
-   - Place your test dataset as `data/testing_data.csv`
-   - Ensure the CSV files have the required columns (see Data Format section)
+- Cover_Thickness_mm
+- Reinforcement_Diameter_mm
+- Water_Cement_Ratio
+- Temperature_K
+- Relative_Humidity_pct
+- Chloride_Ion_Content_kgm3
+- Time_Years
+- Corrosion_Rate_uAcm2 (target variable)
 
 ## Usage
 
-### Complete Pipeline
+### Training the Model
 
-Run the entire pipeline with default settings:
-
-```bash
-python main.py --input-data data/Chloride_dataset.csv --test-data data/testing_data.csv
-```
-
-### Individual Steps
-
-Run specific pipeline steps:
+1. Ensure the dataset file `Corrosion_Dataset_processed.csv` is in the `data/` folder
+2. Navigate to the scripts folder and run the training script:
 
 ```bash
-# Data augmentation only
-python main.py --step augmentation --input-data data/Chloride_dataset.csv
-
-# Model training only
-python main.py --step training --input-data data/Chloride_dataset.csv --test-data data/testing_data.csv
-
-# Sensitivity analysis only
-python main.py --step sensitivity --input-data data/Chloride_dataset.csv --test-data data/testing_data.csv
+cd scripts
+python train_model.py
 ```
 
-### Advanced Options
+This will:
+- Load and preprocess the data from `data/` folder
+- Generate virtual samples (low and high rates)
+- Train segmented XGBoost models
+- Evaluate performance
+- Generate visualizations (saved to `visualizations/`)
+- Save trained models (saved to `models/`)
 
+### Making Predictions
+
+**Option 1: Web Interface (Recommended)**
 ```bash
-# Skip data augmentation
-python main.py --input-data data/Chloride_dataset.csv --test-data data/testing_data.csv --skip-augmentation
+cd scripts
+streamlit run app.py
+```
+Then open http://localhost:8501 in your browser.
 
-# Custom output directory
-python main.py --input-data data/Chloride_dataset.csv --test-data data/testing_data.csv --output-dir custom_results
-
-# Debug mode
-python main.py --input-data data/Chloride_dataset.csv --test-data data/testing_data.csv --log-level DEBUG
+**Option 2: Command Line**
+```bash
+cd scripts
+python predict.py
 ```
 
-## Data Format
-
-### Input Dataset (Chloride_dataset.csv)
-
-The input dataset should contain the following columns:
-
-| Column | Description | Units |
-|--------|-------------|-------|
-| Cover_Thickness_mm | Concrete cover thickness | mm |
-| Reinforcement_Diameter_mm | Reinforcement bar diameter | mm |
-| Water_Cement_Ratio | Water-to-cement ratio | - |
-| Temperature_K | Temperature | Kelvin |
-| Relative_Humidity_pct | Relative humidity | % |
-| Chloride_Ion_Content_kgm3 | Chloride ion content | kg/m³ |
-| Time_Years | Time exposure | years |
-| Corrosion_Rate_uAcm2 | Corrosion rate (target variable) | μA/cm² |
-
-### Test Dataset (testing_data.csv)
-
-Same format as input dataset, used for model evaluation.
-
-## Model Architecture
-
-### Ensemble Model
-
-The pipeline uses a voting regressor combining three models:
-
-1. **Multi-layer Perceptron (MLP)**:
-   - Architecture: 100-50-25 neurons
-   - Activation: ReLU
-   - Regularization: L2 (α=0.001)
-   - Early stopping enabled
-
-2. **XGBoost Model 1** (Primary):
-   - 400 estimators
-   - Max depth: 6
-   - Learning rate: 0.08
-   - Regularization: α=0.1, λ=0.1
-
-3. **XGBoost Model 2** (Secondary):
-   - 300 estimators
-   - Max depth: 5
-   - Learning rate: 0.1
-   - Regularization: α=0.05, λ=0.05
-
-**Ensemble Weights**: MLP (30%), XGBoost1 (40%), XGBoost2 (30%)
-
-### Data Preprocessing
-
-- **Feature Scaling**: RobustScaler (robust to outliers)
-- **Target Transformation**: Log1p transformation for corrosion rates
-- **Data Augmentation**: Safe percentage-based noise augmentation
-
-## Performance Metrics
-
-The model evaluation includes:
-
-- **R² Score**: Coefficient of determination
-- **RMSE**: Root Mean Square Error
-- **MAE**: Mean Absolute Error
-- **Error Rate Analysis**: Percentage of predictions within error thresholds (5%, 10%, 15%, 20%, 30%)
-- **Feature Importance**: XGBoost-based feature importance ranking
-
-## Sensitivity Analysis
-
-The sensitivity analysis evaluates how input variable perturbations affect predictions:
-
-- **Perturbation Levels**: -10%, -5%, +5%, +10%
-- **Analysis Method**: One-at-a-time perturbation
-- **Outputs**: 
-  - Sensitivity ranking
-  - Detailed impact analysis
-  - Visualization plots
-  - Practical recommendations
-
-## Output Files
-
-### Model Files
-- `chloride_corrosion_model.pkl`: Trained ensemble model
-- `feature_scaler.pkl`: Fitted feature scaler
-
-### Results Files
-- `final_model_predictions.csv`: Detailed predictions vs actual values
-- `model_feature_importance.csv`: Feature importance rankings
-- `model_performance_summary.csv`: Performance metrics summary
-
-### Sensitivity Analysis Files
-- `feature_sensitivity_ranking.csv`: Overall sensitivity rankings
-- `detailed_sensitivity_analysis.csv`: Sample-level sensitivity results
-- `sensitivity_summary_table.csv`: Summary table format
-- `sensitivity_ranking.png`: Tornado diagram
-- `sensitivity_heatmap.png`: Sensitivity heatmap
-- `individual_sensitivities.png`: Individual feature sensitivity curves
-
-## API Reference
-
-### DataAugmenter Class
+Or use programmatically:
 
 ```python
-from src.data_augmentation import DataAugmenter
+from predict import predict_from_dict
 
-augmenter = DataAugmenter(target_samples=800)
-X_aug, y_aug = augmenter.augment_dataset('data/input.csv')
+input_data = {
+    "Cover_Thickness_mm": 50,
+    "Reinforcement_Diameter_mm": 16,
+    "Water_Cement_Ratio": 0.45,
+    "Temperature_K": 298,
+    "Relative_Humidity_pct": 75,
+    "Chloride_Ion_Content_kgm3": 2.5,
+    "Time_Years": 10
+}
+
+result = predict_from_dict(input_data)
+print(f"Predicted corrosion rate: {result['final_prediction']:.3f} µA/cm²")
 ```
 
-### ChlorideCorrosionPredictor Class
+## Model Performance
 
-```python
-from src.model_training import ChlorideCorrosionPredictor
+- **R² Score**: 0.901
+- **RMSE**: 0.0014
+- **MAE**: 0.0236
+- **Samples with ≤10% Error**: 46.94%
+- **Samples with ≤5% Error**: 32.65%
 
-predictor = ChlorideCorrosionPredictor()
-results = predictor.train_and_evaluate('data/train.csv', 'data/test.csv')
-```
+## License
 
-### SensitivityAnalyzer Class
+[Add your license information here]
 
-```python
-from src.sensitivity_analysis import SensitivityAnalyzer
+## Contact
 
-analyzer = SensitivityAnalyzer()
-sensitivity_df, detailed_df = analyzer.run_complete_analysis(
-    'data/train.csv', 'data/test.csv'
-)
-```
+[Add your contact information here]
 

@@ -1,24 +1,9 @@
-# Chloride Corrosion Prediction - Requirements
-# Core data science libraries
-pandas>=1.5.0
-numpy>=1.21.0
-scikit-learn>=1.1.0
+pandas>=2.0.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+scikit-learn>=1.3.0
+xgboost>=2.0.0
+joblib>=1.3.0
+streamlit>=1.28.0
 
-# Machine learning libraries
-xgboost>=1.6.0
-
-# Visualization libraries
-matplotlib>=3.5.0
-seaborn>=0.11.0
-
-# Utilities
-joblib>=1.1.0
-
-# Optional: Jupyter notebook support
-jupyter>=1.0.0
-ipykernel>=6.0.0
-
-# Development and testing (optional)
-pytest>=7.0.0
-black>=22.0.0
-flake8>=4.0.0
