@@ -2,6 +2,10 @@
 
 Machine learning model for predicting corrosion rates in reinforced concrete structures using XGBoost with segmented modeling approach.
 
+## 🌐 Live Demo
+
+**Try the interactive app:** [chloride-corrosion-prediction.streamlit.app](https://chloride-corrosion-prediction.streamlit.app)
+
 ## Overview
 
 This project implements a segmented XGBoost regression model to predict corrosion rates based on environmental and material properties. The model uses a dual-segment approach (low vs. high corrosion rates) with virtual sample generation to improve prediction accuracy.
@@ -85,14 +89,17 @@ This will:
 
 ### Making Predictions
 
-**Option 1: Web Interface (Recommended)**
+**Option 1: Live Web App (Recommended)**
+🌐 **[Try the live app here](https://chloride-corrosion-prediction.streamlit.app)**
+
+**Option 2: Local Web Interface**
 ```bash
 cd scripts
 streamlit run app.py
 ```
 Then open http://localhost:8501 in your browser.
 
-**Option 2: Command Line**
+**Option 3: Command Line**
 ```bash
 cd scripts
 python predict.py
