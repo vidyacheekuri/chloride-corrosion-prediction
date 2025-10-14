@@ -68,8 +68,8 @@ data/predictions_*.csv
 data/sensitivity_*.csv
 data/*.txt
 
-# Generated visualizations
-visualizations/*.png
-visualizations/*.jpg
-visualizations/*.pdf
+# Note: We keep visualizations tracked for documentation purposes
+# visualizations/*.png
+# visualizations/*.jpg
+# visualizations/*.pdf
 
