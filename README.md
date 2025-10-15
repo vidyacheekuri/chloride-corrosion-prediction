@@ -150,7 +150,21 @@ The model identifies the following key factors affecting corrosion rates:
 
 ## Sensitivity Analysis Report
 
-A comprehensive parameter sensitivity analysis reveals how each input variable affects corrosion predictions:
+### Top 3 Critical Factors
+
+**1 Temperature_K**  
+**52.88%**  
+*Critical environmental factor affecting reaction kinetics*
+
+**2 Relative_Humidity_pct**  
+**22.18%**  
+*Primary moisture content determinant*
+
+**3 Water_Cement_Ratio**  
+**14.46%**  
+*Controls concrete permeability and durability*
+
+### Complete Sensitivity Ranking
 
 | Rank | Parameter | Sensitivity | Impact Level | Description |
 |------|-----------|-------------|--------------|-------------|
