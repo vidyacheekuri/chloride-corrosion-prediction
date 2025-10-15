@@ -132,11 +132,5 @@ print(f"Predicted corrosion rate: {result['final_prediction']:.3f} µA/cm²")
 - **Samples with ≤10% Error**: 46.94%
 - **Samples with ≤5% Error**: 32.65%
 
-## License
 
-[Add your license information here]
-
-## Contact
-
-[Add your contact information here]
 
