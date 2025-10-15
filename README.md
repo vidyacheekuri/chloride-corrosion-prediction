@@ -132,5 +132,21 @@ print(f"Predicted corrosion rate: {result['final_prediction']:.3f} µA/cm²")
 - **Samples with ≤10% Error**: 46.94%
 - **Samples with ≤5% Error**: 32.65%
 
+## Feature Importance Analysis
+
+The model identifies the following key factors affecting corrosion rates:
+
+| Rank | Factor | Importance | Description |
+|------|--------|------------|-------------|
+| 1 | Relative_Humidity_pct | 36.23% | Critical environmental factor affecting moisture content |
+| 2 | Humidity_Temp | 16.67% | Interaction between humidity and temperature |
+| 3 | Temperature_K | 15.10% | Environmental factor affecting reaction kinetics |
+| 4 | Chloride_Ion_Content_kgm3 | 14.68% | Primary corrosion agent concentration |
+| 5 | Water_Cement_Ratio | 6.60% | Controls concrete permeability |
+| 6 | Time_Years | 3.31% | Exposure duration effect |
+| 7 | Cover_Thickness_mm | 3.21% | Physical barrier protection |
+| 8 | Reinforcement_Diameter_mm | 1.96% | Steel reinforcement size |
+| 9 | Cement_Cover | 2.24% | Interaction between cement ratio and cover |
+
 
 
