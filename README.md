@@ -148,5 +148,30 @@ The model identifies the following key factors affecting corrosion rates:
 | 8 | Reinforcement_Diameter_mm | 1.96% | Steel reinforcement size |
 | 9 | Cement_Cover | 2.24% | Interaction between cement ratio and cover |
 
+## Sensitivity Analysis Report
+
+A comprehensive parameter sensitivity analysis reveals how each input variable affects corrosion predictions:
+
+| Rank | Parameter | Sensitivity | Impact Level | Description |
+|------|-----------|-------------|--------------|-------------|
+| 1 | **Temperature (K)** | 30.70% | **High** | Critical environmental factor affecting reaction kinetics |
+| 2 | **Relative Humidity (%)** | 22.18% | **Moderate** | Primary moisture content determinant |
+| 3 | **Water-Cement Ratio** | 14.46% | **Moderate** | Controls concrete permeability and durability |
+| 4 | **Cover Thickness (mm)** | 7.39% | **Low** | Physical barrier protection mechanism |
+| 5 | **Chloride Content (kg/m³)** | 3.27% | **Low** | Corrosion agent concentration |
+| 6 | **Reinforcement Diameter (mm)** | 2.56% | **Low** | Steel reinforcement geometry |
+| 7 | **Exposure Time (years)** | 1.11% | **Low** | Temporal exposure duration |
+
+### Key Findings:
+- **Environmental factors** (Temperature + Humidity) account for **52.88%** of prediction sensitivity
+- **Temperature is the dominant factor** with 30.70% sensitivity impact
+- **Structural parameters** (Cover, Diameter) show surprisingly low sensitivity
+- **Time effect is minimal** (1.11%), suggesting corrosion occurs rapidly once conditions are met
+
+### Engineering Implications:
+1. **Climate control** is more effective than structural design for corrosion prevention
+2. **Temperature monitoring** should be prioritized in corrosion risk assessment
+3. **Humidity management** offers significant corrosion reduction potential
+4. **Material selection** (water-cement ratio) has moderate but meaningful impact
 
 

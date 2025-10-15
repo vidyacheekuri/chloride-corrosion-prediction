@@ -68,7 +68,7 @@ env/
 # Generated data files
 data/predictions_*.csv
 data/sensitivity_*.csv
-data/*.txt
+# data/*.txt  # Allow sensitivity report
 
 # Note: We keep visualizations tracked for documentation purposes
 # visualizations/*.png

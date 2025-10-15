@@ -1,0 +1,70 @@
+======================================================================
+SENSITIVITY ANALYSIS REPORT
+Chloride Corrosion Prediction Model
+======================================================================
+
+BASELINE CONDITIONS:
+----------------------------------------------------------------------
+  Cover Thickness (mm)....................      50.00
+  Reinforcement Diameter (mm).............      16.00
+  Water-Cement Ratio......................       0.45
+  Temperature (K).........................     298.00
+  Relative Humidity (%)...................      75.00
+  Chloride Content (kg/m³)................       2.50
+  Exposure Time (years)...................      10.00
+
+  Baseline Prediction.....................     0.1040 µA/cm²
+
+
+SENSITIVITY RANKING (Most to Least Influential):
+----------------------------------------------------------------------
+
+1. Temperature (K)
+   Prediction Range: 0.0256 µA/cm²
+   Relative Change:  30.70%
+   Impact Level:     High
+
+2. Relative Humidity (%)
+   Prediction Range: 0.0188 µA/cm²
+   Relative Change:  22.18%
+   Impact Level:     Moderate
+
+3. Water-Cement Ratio
+   Prediction Range: 0.0174 µA/cm²
+   Relative Change:  14.46%
+   Impact Level:     Moderate
+
+4. Cover Thickness (mm)
+   Prediction Range: 0.0078 µA/cm²
+   Relative Change:  7.39%
+   Impact Level:     Low
+
+5. Chloride Content (kg/m³)
+   Prediction Range: 0.0033 µA/cm²
+   Relative Change:  3.27%
+   Impact Level:     Low
+
+6. Reinforcement Diameter (mm)
+   Prediction Range: 0.0026 µA/cm²
+   Relative Change:  2.56%
+   Impact Level:     Low
+
+7. Exposure Time (years)
+   Prediction Range: 0.0012 µA/cm²
+   Relative Change:  1.11%
+   Impact Level:     Low
+
+======================================================================
+
+KEY INSIGHTS:
+----------------------------------------------------------------------
+
+Most Influential Parameters:
+  1. Temperature (K) (30.7% change)
+  2. Relative Humidity (%) (22.2% change)
+  3. Water-Cement Ratio (14.5% change)
+
+Least Influential Parameter:
+  → Exposure Time (years) (1.1% change)
+
+======================================================================
